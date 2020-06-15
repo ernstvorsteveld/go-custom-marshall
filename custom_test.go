@@ -2,7 +2,6 @@ package custom
 
 import (
 	"encoding/json"
-	"fmt"
 	"testing"
 )
 
@@ -20,5 +19,9 @@ func Test_should_marshall_customized(t *testing.T) {
 		t.Error("Marshaller failed")
 	}
 
-	fmt.Printf("Got string %s", string(MarshaljsonBytes))
+	expected := "{\"name\":\"John\",\"email\":\"john.doe@example.com\"}"
+	result := string(MarshaljsonBytes)
+	if expected != result {
+		t.Errorf("Marshalling failed, expected %s, got %s\n", expected, result)
+	}
 }
