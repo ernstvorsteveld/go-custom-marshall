@@ -8,5 +8,5 @@ This is a learning project for customizing JSN Marshalling
 [source,bash]
 ----
 go test -bench=BenchmarkMarshall -cpuprofile=cpu.out
-go tool pprof perf.test cpu.out
+ go tool pprof go-custom-marshall.test cpu.out
 ----
