@@ -15,7 +15,7 @@ type Email struct {
 // Person is first and email
 type Person struct {
 	First string `json:"name"`
-	Email Email  `json:"email"`
+	Email *Email `json:"email"`
 }
 
 func (em *Email) String() string {
@@ -32,8 +32,7 @@ func (em *Email) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON for unmarshalling email
 func (em *Email) UnmarshalJSON(b []byte) error {
-
-	if string(b) == `null` {
+	if string(b) == "null" {
 		return nil
 	}
 
