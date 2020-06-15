@@ -32,10 +32,6 @@ func (em *Email) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON for unmarshalling email
 func (em *Email) UnmarshalJSON(b []byte) error {
-	if string(b) == "null" {
-		return nil
-	}
-
 	emailAddress, error := unMarshallString(b)
 	if error != nil {
 		return error
