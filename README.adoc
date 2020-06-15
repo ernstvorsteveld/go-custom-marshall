@@ -1,0 +1,12 @@
+= Customizing Marshalling
+
+This is a learning project for customizing JSN Marshalling
+
+== Profiling
+
+.Profiling commands
+[source,bash]
+----
+go test -bench=BenchmarkMarshall -cpuprofile=cpu.out
+go tool pprof perf.test cpu.out
+----

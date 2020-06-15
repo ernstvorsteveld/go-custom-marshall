@@ -2,6 +2,7 @@ package custom
 
 import (
 	"encoding/json"
+	"strconv"
 	"testing"
 )
 
@@ -73,4 +74,23 @@ func Test_should_marshall_nil_email(t *testing.T) {
 	if person.Email != nil {
 		t.Errorf("Email marshall does not match, expected %s, got %s\n", "john.doe", person.Email.Name)
 	}
+}
+
+var MarshaljsonBytes []byte
+
+func benchmarkMarshall(b *testing.B, num int) {
+	var p = Person{
+		First: "John" + strconv.Itoa(num),
+		Email: &Email{
+			Name:   "",
+			Domain: "example.com",
+		},
+	}
+	for i := 0; i < num; i++ {
+		MarshaljsonBytes, _ = json.Marshal(&p)
+	}
+}
+
+func BenchmarkMarshall(b *testing.B) {
+	benchmarkMarshall(b, 1000000)
 }
