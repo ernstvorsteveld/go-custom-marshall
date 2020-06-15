@@ -73,5 +73,4 @@ func Test_should_marshall_nil_email(t *testing.T) {
 	if person.Email != nil {
 		t.Errorf("Email marshall does not match, expected %s, got %s\n", "john.doe", person.Email.Name)
 	}
-
 }

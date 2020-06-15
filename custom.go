@@ -36,16 +36,26 @@ func (em *Email) UnmarshalJSON(b []byte) error {
 		return nil
 	}
 
-	var fullEmailAddress string
-	if err := json.Unmarshal(b, &fullEmailAddress); err != nil {
-		return err
+	emailAddress, error := unMarshallString(b)
+	if error != nil {
+		return error
 	}
-
-	mid := strings.Index(fullEmailAddress, "@")
-	username := fullEmailAddress[:mid]
-	domain := fullEmailAddress[mid+1:]
-
+	username, domain := splitEmail(emailAddress)
 	*em = Email{Name: username, Domain: domain}
-
 	return nil
+}
+
+func unMarshallString(b []byte) (string, error) {
+	var s string
+	if err := json.Unmarshal(b, &s); err != nil {
+		return "", err
+	}
+	return s, nil
+}
+
+func splitEmail(e string) (string, string) {
+	mid := strings.Index(e, "@")
+	username := e[:mid]
+	domain := e[mid+1:]
+	return username, domain
 }
